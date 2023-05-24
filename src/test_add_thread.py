@@ -15,7 +15,8 @@ from modules.utils import (
     get_response_text,
     send_formdata,
     get_submission_properties,
-    get_lorem_ipsum
+    get_lorem_ipsum,
+    get_page_id
 )
 
 from bs4 import BeautifulSoup, SoupStrainer
@@ -60,18 +61,11 @@ def get_formdata(html: str) -> dict:
         form_name["name"]: form_name["value"]
     }
 
-def get_thread_id(html: str) -> int:
-    """Get ID of the created thread"""
-
-    breadcrumbs = SoupStrainer("nav", attrs = {"id": "Breadcrumb"})
-    soup = BeautifulSoup(html, "html.parser", parse_only = breadcrumbs)
-    return int((soup.select_one("a:last-child"))["href"].split("/")[-1])
-
 def test_add_thread(api_session):
     form_html = get_response_text(api_session, ADD_THREAD_URL)
     form_data = get_formdata(form_html)
     res_html = send_formdata(api_session, ADD_THREAD_URL, form_data)
-    thread_id = get_thread_id(res_html)
+    thread_id = get_page_id(res_html)
     thread_props = get_submission_properties(api_session, "Thread", thread_id, "_idRow,_aSubmitter,_sText")
 
     assert thread_props["_idRow"] == thread_id
