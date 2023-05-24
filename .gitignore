@@ -1,0 +1,18 @@
+src/modules/*.txt
+
+src/.pytest_cache/*
+src/__pycache__/*
+
+src/modules/__pycache__/*
+src/modules/credentials.py
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
