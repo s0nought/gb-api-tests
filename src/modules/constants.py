@@ -52,4 +52,15 @@ THREAD_FORM_ENTRIES = {
     "comments": COMMENTS_MODE_MAP["Open"]
 }
 
+QUESTION_FORM_ENTRIES = {
+    "title": "Test Question",
+    "game": f"{GAME_ID}",
+    "category": "1553", # Other/Misc
+    "text": f"{LOREM_IPSUM} {str(datetime.utcnow())}",
+    "subtitle": "What is the answer to the ultimate question?",
+    "access": ACCESS_MAP["Private"],
+    "comments": COMMENTS_MODE_MAP["Open"]
+}
+
 ADD_THREAD_URL = f"{BASE_URL}/threads/add?gameid={GAME_ID}"
+ADD_QUESTION_URL = f"{BASE_URL}/questions/add?gameid={GAME_ID}"
