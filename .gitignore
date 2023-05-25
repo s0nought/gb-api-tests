@@ -1,3 +1,6 @@
+# GIMP file format
+*.xcf
+
 src/modules/*.txt
 
 src/.pytest_cache/*
