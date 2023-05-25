@@ -74,10 +74,10 @@ def send_formdata(api_session, url: str, data: dict) -> str:
     assert_status_code(res, 200)
     return res.text
 
-def get_submission_properties(api_session, model: str, id: int, properties: str) -> dict:
+def get_submission_properties(api_session, model_name: str, id: int, properties: str) -> dict:
     """Send GET request and return response JSON"""
 
-    res = api_session.get(f"{BASE_URL_API}/{model}/{id}?_csvProperties={properties}")
+    res = api_session.get(f"{BASE_URL_API}/{model_name}/{id}?_csvProperties={properties}")
     assert_status_code(res, 200)
     return res.json()
 
