@@ -1,3 +1,5 @@
+from datetime import datetime
+
 USER_NAME = "nnmnnms"
 GAME_ID = 6767
 
@@ -37,6 +39,17 @@ CSS_SELECTORS = {
     "analytics": "#AnalyticsToggle input",
     "comments": "#CommentsMode input",
     "form_name": "input[name=FormName]"
+}
+
+THREAD_FORM_ENTRIES = {
+    "title": "Test Thread",
+    "game": f"{GAME_ID}",
+    "category": "5148", # Other/Misc
+    "text": f"{LOREM_IPSUM} {str(datetime.utcnow())}",
+    "subtitle": "I\'m afraid I can\'t do that, Dave",
+    "access": ACCESS_MAP["Private"],
+    "toc": TOC_MAP["Disabled"],
+    "comments": COMMENTS_MODE_MAP["Open"]
 }
 
 ADD_THREAD_URL = f"{BASE_URL}/threads/add?gameid={GAME_ID}"
