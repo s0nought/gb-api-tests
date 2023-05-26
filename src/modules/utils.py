@@ -120,7 +120,7 @@ def get_formdata(html: str, entries: dict[str, str]) -> dict[str, str]:
     if "image" in entries_list:
         tag = soup.select_one(CSS_SELECTORS["image"])
         data.update({"_sTicketId" : ""})
-        data.update({tag["name"] : ""})
+        data.update({tag["name"] : "REPLACE_WITH_IMAGE_LIST"})
 
     return data
 

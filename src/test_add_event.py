@@ -22,15 +22,16 @@ def test_add_event(api_session):
     form_html = get_response_text(api_session, ADD_EVENT_URL)
     form_data = get_formdata(form_html, EVENT_FORM_ENTRIES)
 
-    # I've confirmed I can upload images and return _sTicketId
-    # and construct FormData containing the mentioned field.
-    # It'd POST successfully. Still, there's no image I've uploaded.
-    # 
-    # Commenting this block out for now.
-    # 
-    # file_name, file_path, mime_type = EVENT_FORM_ENTRIES["image"]
-    # file, ticket_id = upload_file(api_session, file_name, file_path, mime_type)
-    # form_data.update({"_sTicketId": ticket_id})
+    file_name, file_path, mime_type = EVENT_FORM_ENTRIES["image"]
+    file, ticket_id = upload_file(api_session, file_name, file_path, mime_type)
+
+    form_data.update({"_sTicketId": ticket_id})
+
+    for k, v in form_data.items():
+        if v == "REPLACE_WITH_IMAGE_LIST":
+            image_field = k
+
+    form_data.update({image_field : '[{"name":"_sTicketId","value":"' + ticket_id + '"}]'})
 
     res_html = send_formdata(api_session, ADD_EVENT_URL, form_data)
     submission_id = get_page_id(res_html)
