@@ -21,8 +21,8 @@ def test_add_thread(api_session):
     form_data = get_formdata(form_html, QUESTION_FORM_ENTRIES)
     res_html = send_formdata(api_session, ADD_QUESTION_URL, form_data)
     submission_id = get_page_id(res_html)
-    thread_props = get_submission_properties(api_session, "Question", submission_id, "_idRow,_aSubmitter,_sText")
+    submission_props = get_submission_properties(api_session, "Question", submission_id, "_idRow,_aSubmitter,_sText")
 
-    assert thread_props["_idRow"] == submission_id
-    assert thread_props["_aSubmitter"]["_sName"] == USER_NAME
-    assert thread_props["_sText"] == QUESTION_FORM_ENTRIES["text"]
+    assert submission_props["_idRow"] == submission_id
+    assert submission_props["_aSubmitter"]["_sName"] == USER_NAME
+    assert submission_props["_sText"] == QUESTION_FORM_ENTRIES["text"]
