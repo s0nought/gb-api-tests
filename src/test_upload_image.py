@@ -1,20 +1,18 @@
-"""Upload a Image"""
+import pytest
 
-from modules.assertions import assert_status_code
-
+from modules.constants import EVENT_IMAGE_BASE_URL, MOD_IMAGE_BASE_URL
+from modules.dictionaries import IMAGE_UPLOADER_D
 from modules.fixtures import api_session
+from modules.formdata import EVENT_IMAGE, MOD_IMAGE_1
+from modules.utils import send_get_request, upload_image
 
-from modules.utils_image import upload_file
+@pytest.mark.parametrize("model_name, image, base_url", [
+        ("Event", EVENT_IMAGE, EVENT_IMAGE_BASE_URL),
+        ("Mod", MOD_IMAGE_1, MOD_IMAGE_BASE_URL)
+    ])
+def test_fn(api_session, model_name, image, base_url):
+    sfile, ticket_id = upload_image(api_session, model_name, image)
+    url = base_url + sfile
+    res = send_get_request(api_session, url)
 
-from modules.constants import EVENT_FORM_ENTRIES # temporary
-
-def test_upload_image(api_session):
-    file_name, file_path, mime_type = EVENT_FORM_ENTRIES["image"]
-    file, ticket_id = upload_file(api_session, file_name, file_path, mime_type)
-
-    url_event = f"https://images.gamebanana.com/img/banners/events/{file}"
-    # url_mod = f"https://files.gamebanana.com/img/ss/mods/{file}"
-    res = api_session.get(url_event)
-
-    assert_status_code(res, 200)
     assert len(res.headers["etag"]) > 0

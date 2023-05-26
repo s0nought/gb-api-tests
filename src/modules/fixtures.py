@@ -1,9 +1,9 @@
 import pytest
 import requests
 
+from .assertions import assert_status_code
 from .constants import BASE_URL_API
 from .credentials import credentials
-from .assertions import assert_status_code
 
 Session = requests.sessions.Session
 

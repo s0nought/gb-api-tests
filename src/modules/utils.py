@@ -1,146 +1,45 @@
-from modules.assertions import assert_status_code
+from datetime import datetime
 
-from modules.constants import BASE_URL_API
+from .assertions import assert_status_code
+from .constants import BASE_URL, LOREM_IPSUM
+from .dictionaries import IMAGE_UPLOADER_D
 
-from bs4 import BeautifulSoup, SoupStrainer
+def get_lorem_ipsum() -> str:
+    """Return lorem ipsum with a timestamp"""
 
-from modules.constants import CSS_SELECTORS
+    return f"{LOREM_IPSUM} {str(datetime.utcnow())}"
 
-def get_response_text(api_session, url: str) -> str:
-    """Send GET request and return response text"""
+def send_get_request(api_session, url: str):
+    """Send GET request and return its response"""
 
     res = api_session.get(url)
     assert_status_code(res, 200)
-    return res.text
+    return res
 
-def get_formdata(html: str, entries: dict[str, str]) -> dict[str, str]:
-    """Parse FormData from page HTML"""
-
-    entries_list = entries.keys()
-
-    form = SoupStrainer("form", class_ = "MainForm")
-    soup = BeautifulSoup(html, "html.parser", parse_only = form)
-
-    data = dict()
-
-    token = soup.select_one(CSS_SELECTORS["token"])
-    data.update({token["name"] : token["value"]})
-
-    form_name = soup.select_one(CSS_SELECTORS["form_name"])
-    data.update({form_name["name"] : form_name["value"]})
-
-    if "title" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["title"])
-        data.update({tag["name"] : entries["title"]})
-
-    if "game" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["game"])
-        data.update({tag["name"] : entries["game"]})
-
-    if "category" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["category"])
-        data.update({tag["name"] : entries["category"]})
-
-    if "text" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["text"])
-        data.update({tag["name"] : entries["text"]})
-
-    if "subtitle" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["subtitle"])
-        data.update({tag["name"] : entries["subtitle"]})
-
-    if "access" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["access"])
-        data.update({tag["name"] : entries["access"]})
-
-    if "toc" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["toc"])
-        data.update({tag["name"] : entries["toc"]})
-
-    if "analytics" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["analytics"]) # requires unlock
-        data.update({tag["name"] : entries["analytics"]})
-
-    if "comments" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["comments"])
-        data.update({tag["name"] : entries["comments"]})
-
-    if "start_date_month" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["start_date_month"])
-        data.update({tag["name"] : entries["start_date_month"]})
-
-    if "start_date_day" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["start_date_day"])
-        data.update({tag["name"] : entries["start_date_day"]})
-
-    if "start_date_year" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["start_date_year"])
-        data.update({tag["name"] : entries["start_date_year"]})
-
-    if "start_date_hour" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["start_date_hour"])
-        data.update({tag["name"] : entries["start_date_hour"]})
-
-    if "start_date_minute" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["start_date_minute"])
-        data.update({tag["name"] : entries["start_date_minute"]})
-
-    if "end_date_month" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["end_date_month"])
-        data.update({tag["name"] : entries["end_date_month"]})
-
-    if "end_date_day" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["end_date_day"])
-        data.update({tag["name"] : entries["end_date_day"]})
-
-    if "end_date_year" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["end_date_year"])
-        data.update({tag["name"] : entries["end_date_year"]})
-
-    if "end_date_hour" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["end_date_hour"])
-        data.update({tag["name"] : entries["end_date_hour"]})
-
-    if "end_date_minute" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["end_date_minute"])
-        data.update({tag["name"] : entries["end_date_minute"]})
-
-    if "timezone" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["timezone"])
-        data.update({tag["name"] : entries["timezone"]})
-
-    if "repeat" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["repeat"])
-        data.update({tag["name"] : entries["repeat"]})
-
-    if "location" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["location"])
-        data.update({tag["name"] : entries["location"]})
-
-    if "image" in entries_list:
-        tag = soup.select_one(CSS_SELECTORS["image"])
-        data.update({"_sTicketId" : ""})
-        data.update({tag["name"] : "REPLACE_WITH_IMAGE_LIST"})
-
-    return data
-
-def send_formdata(api_session, url: str, data: dict) -> str:
-    """Send POST request and return response text"""
+def send_post_request(api_session, url: str, data: dict):
+    """Send POST request and return its response"""
 
     res = api_session.post(url, data = data)
     assert_status_code(res, 200)
-    return res.text
+    return res
 
-def get_submission_properties(api_session, model_name: str, id: int, properties: str) -> dict:
-    """Send GET request and return response JSON"""
+def send_post_multipart_request(api_session, url: str, files: dict, data: dict):
+    """Send POST (multipart/form-data) request and return its response"""
 
-    res = api_session.get(f"{BASE_URL_API}/{model_name}/{id}?_csvProperties={properties}")
+    res = api_session.post(url, files = files, data = data)
     assert_status_code(res, 200)
-    return res.json()
+    return res
 
-def get_page_id(html: str) -> int:
-    """Parse submission's ID from page HTML"""
+def upload_image(api_session, model_name: str, image: tuple[str, str, str]) -> tuple[str, str]:
+    """Upload an image and return its _sFile and _sTicketId"""
 
-    breadcrumbs = SoupStrainer("nav", attrs = {"id": "Breadcrumb"})
-    soup = BeautifulSoup(html, "html.parser", parse_only = breadcrumbs)
-    return int((soup.select_one("a:last-child"))["href"].split("/")[-1])
+    file_name, file_path, mime_type = image
+
+    url = f"{BASE_URL}/responders/jfu"
+    data = {"d": IMAGE_UPLOADER_D[model_name]}
+    files = {"files[]": (file_name, open(file_path, mode = "rb"), mime_type)}
+
+    res = send_post_multipart_request(api_session, url, files = files, data = data)
+    img = res.json()["files"][0]
+
+    return img["_sFile"], img["_sTicketId"]

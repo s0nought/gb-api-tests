@@ -1,28 +1,21 @@
-"""Add a Thread and test if actual properties of the created submission match expected"""
+MODEL_NAME = "Thread"
+CSV_PROPERTIES = "_idRow,_aSubmitter,_sText"
 
-from modules.constants import (
-    USER_NAME,
-    THREAD_FORM_ENTRIES,
-    ADD_THREAD_URL
-)
-
+from modules.constants import BASE_URL_API, USER_NAME, ADD_THREAD_URL
 from modules.fixtures import api_session
+from modules.formdata import THREAD_DATA
+from modules.utils import send_get_request, send_post_request
+from modules.utils_parse import get_id, get_formdata
 
-from modules.utils import (
-    get_response_text,
-    get_formdata,
-    send_formdata,
-    get_submission_properties,
-    get_page_id
-)
+def test_fn(api_session):
+    form_html = (send_get_request(api_session, ADD_THREAD_URL)).text
+    form_data = get_formdata(form_html, THREAD_DATA)
+    res_html = (send_post_request(api_session, ADD_THREAD_URL, form_data)).text
 
-def test_add_thread(api_session):
-    form_html = get_response_text(api_session, ADD_THREAD_URL)
-    form_data = get_formdata(form_html, THREAD_FORM_ENTRIES)
-    res_html = send_formdata(api_session, ADD_THREAD_URL, form_data)
-    submission_id = get_page_id(res_html)
-    submission_props = get_submission_properties(api_session, "Thread", submission_id, "_idRow,_aSubmitter,_sText")
+    submission_id = get_id(res_html)
+    submission_url = f"{BASE_URL_API}/{MODEL_NAME}/{submission_id}?_csvProperties={CSV_PROPERTIES}"
+    submission_props = (send_get_request(api_session, submission_url)).json()
 
     assert submission_props["_idRow"] == submission_id
     assert submission_props["_aSubmitter"]["_sName"] == USER_NAME
-    assert submission_props["_sText"] == THREAD_FORM_ENTRIES["text"]
+    assert submission_props["_sText"] == THREAD_DATA["text"]

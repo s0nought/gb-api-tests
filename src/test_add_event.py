@@ -1,30 +1,17 @@
-"""Add a Event and test if actual properties of the created submission match expected"""
+MODEL_NAME = "Event"
+CSV_PROPERTIES = "_idRow,_aSubmitter,_sText"
 
-from modules.constants import (
-    USER_NAME,
-    EVENT_FORM_ENTRIES,
-    ADD_EVENT_URL
-)
-
+from modules.constants import BASE_URL_API, USER_NAME, ADD_EVENT_URL
 from modules.fixtures import api_session
+from modules.formdata import EVENT_DATA
+from modules.utils import send_get_request, send_post_request, upload_image
+from modules.utils_parse import get_id, get_formdata
 
-from modules.utils import (
-    get_response_text,
-    get_formdata,
-    send_formdata,
-    get_submission_properties,
-    get_page_id
-)
+def test_fn(api_session):
+    form_html = (send_get_request(api_session, ADD_EVENT_URL)).text
+    form_data = get_formdata(form_html, EVENT_DATA)
 
-from modules.utils_image import upload_file
-
-def test_add_event(api_session):
-    form_html = get_response_text(api_session, ADD_EVENT_URL)
-    form_data = get_formdata(form_html, EVENT_FORM_ENTRIES)
-
-    file_name, file_path, mime_type = EVENT_FORM_ENTRIES["image"]
-    file, ticket_id = upload_file(api_session, file_name, file_path, mime_type)
-
+    sfile, ticket_id = upload_image(api_session, MODEL_NAME, EVENT_DATA["image"])
     form_data.update({"_sTicketId": ticket_id})
 
     for k, v in form_data.items():
@@ -33,10 +20,12 @@ def test_add_event(api_session):
 
     form_data.update({image_field : '[{"name":"_sTicketId","value":"' + ticket_id + '"}]'})
 
-    res_html = send_formdata(api_session, ADD_EVENT_URL, form_data)
-    submission_id = get_page_id(res_html)
-    submission_props = get_submission_properties(api_session, "Event", submission_id, "_idRow,_aSubmitter,_sText")
+    res_html = (send_post_request(api_session, ADD_EVENT_URL, form_data)).text
+
+    submission_id = get_id(res_html)
+    submission_url = f"{BASE_URL_API}/{MODEL_NAME}/{submission_id}?_csvProperties={CSV_PROPERTIES}"
+    submission_props = (send_get_request(api_session, submission_url)).json()
 
     assert submission_props["_idRow"] == submission_id
     assert submission_props["_aSubmitter"]["_sName"] == USER_NAME
-    assert submission_props["_sText"] == EVENT_FORM_ENTRIES["text"]
+    assert submission_props["_sText"] == EVENT_DATA["text"]
