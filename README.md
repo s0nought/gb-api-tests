@@ -84,3 +84,6 @@ pytest
 ## Tests
 
 - Add Thread
+- Add Question
+- Add Event
+- Upload Image
