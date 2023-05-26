@@ -16,7 +16,7 @@ from modules.utils import (
     get_page_id
 )
 
-def test_add_thread(api_session):
+def test_add_question(api_session):
     form_html = get_response_text(api_session, ADD_QUESTION_URL)
     form_data = get_formdata(form_html, QUESTION_FORM_ENTRIES)
     res_html = send_formdata(api_session, ADD_QUESTION_URL, form_data)

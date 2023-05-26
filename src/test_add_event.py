@@ -18,7 +18,7 @@ from modules.utils import (
 
 from modules.utils_image import upload_file
 
-def test_add_thread(api_session):
+def test_add_event(api_session):
     form_html = get_response_text(api_session, ADD_EVENT_URL)
     form_data = get_formdata(form_html, EVENT_FORM_ENTRIES)
 

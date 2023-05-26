@@ -1,6 +1,6 @@
 from datetime import datetime
 
-# from os.path import dirname, join, normpath
+from os.path import dirname, join, normpath
 
 USER_NAME = "nnmnnms"
 GAME_ID = 6767
@@ -11,8 +11,8 @@ BASE_URL_API = f"{BASE_URL}/apiv11"
 
 LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-# ASSETS_DIR = join(normpath(dirname(__file__)), "..", "assets")
-# EVENT_IMAGE_PATH = join(ASSETS_DIR, "images", "event.png")
+ASSETS_DIR = join(normpath(dirname(__file__)), "..", "assets")
+EVENT_IMAGE_PATH = join(ASSETS_DIR, "images", "event.png")
 
 ACCESS_MAP = {
     "Public": "0", # Everyone can access
@@ -99,7 +99,7 @@ EVENT_FORM_ENTRIES = {
     "timezone": "UTC",
     "repeat": "never",
     "location": "GameBanana\'s Battle Museum",
-    # "image": ("event.png", EVENT_IMAGE_PATH, "image/png"),
+    "image": ("event.png", EVENT_IMAGE_PATH, "image/png"),
     "access": ACCESS_MAP["Private"],
     "toc": TOC_MAP["Disabled"]
 }
