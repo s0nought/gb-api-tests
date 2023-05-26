@@ -8,7 +8,7 @@ from modules.utils_image import upload_file
 
 from modules.constants import EVENT_FORM_ENTRIES # temporary
 
-def test_upload_file(api_session):
+def test_upload_image(api_session):
     file_name, file_path, mime_type = EVENT_FORM_ENTRIES["image"]
     file, ticket_id = upload_file(api_session, file_name, file_path, mime_type)
 
