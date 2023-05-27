@@ -60,3 +60,17 @@ EVENT_DATA = {
     "access": ACCESS["Private"],
     "toc": TOC["Disabled"]
 }
+
+WARE_DATA = {
+    "type": "19", # Other
+    "title": "Test Ware",
+    "game": f"{GAME_ID}",
+    "category": "240", # Other/Misc
+    "text": get_lorem_ipsum(),
+    "pending_message": "Definitely not click-bait",
+    "delivered_message": "Thanks for trusting in us",
+    "subtitle": "Buy my stuff",
+    "screenshots": "[]", # optional
+    "access": ACCESS["Private"],
+    "toc": TOC["Disabled"],
+}

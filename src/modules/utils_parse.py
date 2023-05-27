@@ -118,4 +118,20 @@ def get_formdata(html: str, entries: dict[str, str]) -> dict[str, str]:
         data.update({"_sTicketId" : ""})
         data.update({tag["name"] : "REPLACE_WITH_IMAGE_LIST"})
 
+    if "type" in entries_list:
+        tag = soup.select_one(CSS_SELECTORS["type"])
+        data.update({tag["name"] : entries["type"]})
+
+    if "pending_message" in entries_list:
+        tag = soup.select_one(CSS_SELECTORS["pending_message"])
+        data.update({tag["name"] : entries["pending_message"]})
+
+    if "delivered_message" in entries_list:
+        tag = soup.select_one(CSS_SELECTORS["delivered_message"])
+        data.update({tag["name"] : entries["delivered_message"]})
+
+    if "screenshots" in entries_list:
+        tag = soup.select_one(CSS_SELECTORS["screenshots"])
+        data.update({tag["name"] : entries["screenshots"]})
+
     return data

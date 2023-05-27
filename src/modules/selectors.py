@@ -1,5 +1,6 @@
 CSS_SELECTORS = {
     "token": "input[type=hidden]", # all submissions
+    "form_name": "input[name=FormName]", # all submissions
     "title": "#Name input", # thread, question, event
     "game": "#Category .GameCategory input[type=hidden]", # thread, question, event
     "category": "#Category .Category input[type=hidden]", # thread, question, event
@@ -23,5 +24,8 @@ CSS_SELECTORS = {
     "repeat": "#Repeat select", # values: never, daily, weekly, monthly, yearly; event
     "location": "#Location input", # event
     "image": "#Image input[type=hidden]", # event
-    "form_name": "input[name=FormName]" # all submissions
+    "type": "#Type select", # ware
+    "pending_message": "#PendingMessage .Source textarea", # ware
+    "delivered_message": "#DeliveredMessage .Source textarea", # ware
+    "screenshots": "#Screenshots input[type=hidden]", # ware
 }
