@@ -28,5 +28,17 @@ CSS_SELECTORS = {
     "pending_message": "#PendingMessage .Source textarea", # ware
     "delivered_message": "#DeliveredMessage .Source textarea", # ware
     "screenshots": "#Screenshots input[type=hidden]", # ware
-    "requirements": "#Requirements div.WysiwygList", # request
+    "request_requirements": "#Requirements div.WysiwygList", # request
+    "code": "#Code textarea", # script
+    "who_is_the_creator": "#WhoIsTheCreator input[type=hidden]", # script
+    "submission_authors": "g_sInputName[ ]*=[ ]*\".*\"\;", # RegEx; script
+    "language": "#Language select", # script
+    "comment_instructions": "#CommentInstructions .Source textarea", # script
+    "studio": "#Studio select", # script
+    "license": "#License .Source textarea", # script
+    "license_checklist": "#LicenseChecklist input", # script
+    "requirements": "#Requirements input[type=text]", # script
+    "contest": "#Contest select", # script
+    "jam": "#Jam select", # script
+    "project": "#Project select", # script
 }

@@ -1,7 +1,7 @@
 from os.path import dirname, join, normpath
 
 from .constants import GAME_ID
-from .dictionaries import ACCESS, TOC, COMMENTS_MODE
+from .dictionaries import ACCESS, TOC, COMMENTS_MODE, IS_CREATOR, LANGUAGE
 from .utils import get_lorem_ipsum
 
 ASSETS_DIR = join(normpath(dirname(__file__)), "..", "assets")
@@ -90,8 +90,35 @@ REQUEST_DATA = {
     "game": f"{GAME_ID}",
     "category": "2696", # Other/Misc
     "text": get_lorem_ipsum(),
-    "requirements": "Be my guest",
+    "request_requirements": "Be my guest",
     "subtitle": "",
+    "access": ACCESS["Private"],
+    "toc": TOC["Disabled"],
+}
+
+SCRIPT_DATA = {
+    "title": "Test Script",
+    "game": f"{GAME_ID}",
+    "category": "2697", # Other/Misc
+    "text": get_lorem_ipsum(),
+    "code": "Lorem ipsum",
+    "subtitle": "",
+    "comment_instructions": "",
+    "who_is_the_creator": IS_CREATOR["Yes"],
+    "submission_authors": [
+        ("Key Authors", "2642489", "nnmnnms", "", "Coder"),
+        ("Original Authors", "", "", "", ""),
+        ("Contributors", "", "", "", ""),
+        ("Special Thanks", "", "", "", ""),
+    ],
+    "studio": "0", # Non-Studio
+    "license": "",
+    "license_checklist": "yes", # some defaults
+    "language": LANGUAGE["Plain Text"],
+    "requirements": ("", ""),
+    "contest": "0", # Non-Contest
+    "jam": "0", # Non-jam
+    "project": "0", # No associated Project
     "access": ACCESS["Private"],
     "toc": TOC["Disabled"],
 }
