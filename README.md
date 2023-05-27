@@ -87,3 +87,7 @@ pytest
 - Add Question
 - Add Event
 - Upload Image
+- Add Ware
+- Add Project
+- Add Request
+- Add Script
