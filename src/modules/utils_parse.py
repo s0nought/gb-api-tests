@@ -134,4 +134,8 @@ def get_formdata(html: str, entries: dict[str, str]) -> dict[str, str]:
         tag = soup.select_one(CSS_SELECTORS["screenshots"])
         data.update({tag["name"] : entries["screenshots"]})
 
+    if "requirements" in entries_list:
+        tag = soup.select_one(CSS_SELECTORS["requirements"])
+        data.update({tag["id"] + "[]" : entries["requirements"]})
+
     return data

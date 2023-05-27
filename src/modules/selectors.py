@@ -28,4 +28,5 @@ CSS_SELECTORS = {
     "pending_message": "#PendingMessage .Source textarea", # ware
     "delivered_message": "#DeliveredMessage .Source textarea", # ware
     "screenshots": "#Screenshots input[type=hidden]", # ware
+    "requirements": "#Requirements div.WysiwygList", # request
 }

@@ -25,7 +25,7 @@ THREAD_DATA = {
     "subtitle": "I\'m afraid I can\'t do that, Dave",
     "access": ACCESS["Private"],
     "toc": TOC["Disabled"],
-    "comments": COMMENTS_MODE["Open"]
+    "comments": COMMENTS_MODE["Open"],
 }
 
 QUESTION_DATA = {
@@ -35,7 +35,7 @@ QUESTION_DATA = {
     "text": get_lorem_ipsum(),
     "subtitle": "What is the answer to the ultimate question?",
     "access": ACCESS["Private"],
-    "comments": COMMENTS_MODE["Open"]
+    "comments": COMMENTS_MODE["Open"],
 }
 
 EVENT_DATA = {
@@ -58,7 +58,7 @@ EVENT_DATA = {
     "location": "GameBanana\'s Battle Museum",
     # "image": EVENT_IMAGE,
     "access": ACCESS["Private"],
-    "toc": TOC["Disabled"]
+    "toc": TOC["Disabled"],
 }
 
 WARE_DATA = {
@@ -81,6 +81,17 @@ PROJECT_DATA = {
     "category": "564", # Other/Misc
     "text": get_lorem_ipsum(),
     "subtitle": "PROject MT",
+    "access": ACCESS["Private"],
+    "toc": TOC["Disabled"],
+}
+
+REQUEST_DATA = {
+    "title": "Test Request",
+    "game": f"{GAME_ID}",
+    "category": "2696", # Other/Misc
+    "text": get_lorem_ipsum(),
+    "requirements": "Be my guest",
+    "subtitle": "",
     "access": ACCESS["Private"],
     "toc": TOC["Disabled"],
 }

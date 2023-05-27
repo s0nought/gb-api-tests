@@ -9,6 +9,7 @@ ADD_QUESTION_URL = f"{BASE_URL}/questions/add?gameid={GAME_ID}"
 ADD_EVENT_URL = f"{BASE_URL}/events/add?gameid={GAME_ID}"
 ADD_WARE_URL = f"{BASE_URL}/wares/add?gameid={GAME_ID}"
 ADD_PROJECT_URL = f"{BASE_URL}/projects/add?gameid={GAME_ID}"
+ADD_REQUEST_URL = f"{BASE_URL}/requests/add?gameid={GAME_ID}"
 
 EVENT_IMAGE_BASE_URL = "https://images.gamebanana.com/img/banners/events/"
 MOD_IMAGE_BASE_URL = "https://files.gamebanana.com/img/ss/mods/"
