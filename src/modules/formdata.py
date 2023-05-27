@@ -74,3 +74,13 @@ WARE_DATA = {
     "access": ACCESS["Private"],
     "toc": TOC["Disabled"],
 }
+
+PROJECT_DATA = {
+    "title": "Test Project",
+    "game": f"{GAME_ID}",
+    "category": "564", # Other/Misc
+    "text": get_lorem_ipsum(),
+    "subtitle": "PROject MT",
+    "access": ACCESS["Private"],
+    "toc": TOC["Disabled"],
+}
