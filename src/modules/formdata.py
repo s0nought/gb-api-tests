@@ -6,15 +6,16 @@ from .utils import get_lorem_ipsum
 
 ASSETS_DIR = join(normpath(dirname(__file__)), "..", "assets")
 
-EVENT_IMAGE_NAME = "event.png"
-EVENT_IMAGE_PATH = join(ASSETS_DIR, "images", EVENT_IMAGE_NAME)
-EVENT_IMAGE_TYPE = "image/png"
-EVENT_IMAGE = (EVENT_IMAGE_NAME, EVENT_IMAGE_PATH, EVENT_IMAGE_TYPE)
+# see dictionaries.py
+# EVENT_IMAGE_NAME = "event.png"
+# EVENT_IMAGE_PATH = join(ASSETS_DIR, "images", EVENT_IMAGE_NAME)
+# EVENT_IMAGE_TYPE = "image/png"
+# EVENT_IMAGE = (EVENT_IMAGE_NAME, EVENT_IMAGE_PATH, EVENT_IMAGE_TYPE)
 
-MOD_IMAGE_NAME_1 = "mod_1.jpg"
-MOD_IMAGE_PATH_1 = join(ASSETS_DIR, "images", MOD_IMAGE_NAME_1)
-MOD_IMAGE_TYPE_1 = "image/jpg"
-MOD_IMAGE_1 = (MOD_IMAGE_NAME_1, MOD_IMAGE_PATH_1, MOD_IMAGE_TYPE_1)
+# MOD_IMAGE_NAME_1 = "mod_1.jpg"
+# MOD_IMAGE_PATH_1 = join(ASSETS_DIR, "images", MOD_IMAGE_NAME_1)
+# MOD_IMAGE_TYPE_1 = "image/jpg"
+# MOD_IMAGE_1 = (MOD_IMAGE_NAME_1, MOD_IMAGE_PATH_1, MOD_IMAGE_TYPE_1)
 
 THREAD_DATA = {
     "title": "Test Thread",
@@ -55,7 +56,7 @@ EVENT_DATA = {
     "timezone": "UTC",
     "repeat": "never",
     "location": "GameBanana\'s Battle Museum",
-    "image": EVENT_IMAGE,
+    # "image": EVENT_IMAGE,
     "access": ACCESS["Private"],
     "toc": TOC["Disabled"]
 }
