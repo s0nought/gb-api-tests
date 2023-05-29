@@ -1,3 +1,13 @@
+PLURALS = {
+    "Event": "events",
+    "Project": "projects",
+    "Question": "questions",
+    "Request": "requests",
+    "Script": "scripts",
+    "Thread": "threads",
+    "Ware": "wares",
+}
+
 ACCESS = {
     "Public": "0",  # Everyone can access
     "Private": "2", # Only you, permit holders, studio leaders and moderators can access

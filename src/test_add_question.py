@@ -1,16 +1,17 @@
-MODEL_NAME = "Question"
-CSV_PROPERTIES = "_idRow,_aSubmitter,_sText"
-
-from modules.constants import BASE_URL_API, USER_NAME, ADD_QUESTION_URL
+from modules.constants import BASE_URL_API, USER_NAME
 from modules.fixtures import api_session
 from modules.formdata import QUESTION_DATA
-from modules.utils import send_get_request, send_post_request
+from modules.utils import get_add_url, send_get_request, send_post_request
 from modules.utils_parse import get_id, get_formdata
 
+MODEL_NAME = "Question"
+CSV_PROPERTIES = "_idRow,_aSubmitter,_sText"
+ADD_URL = get_add_url(MODEL_NAME)
+
 def test_fn(api_session):
-    form_html = (send_get_request(api_session, ADD_QUESTION_URL)).text
+    form_html = (send_get_request(api_session, ADD_URL)).text
     form_data = get_formdata(form_html, QUESTION_DATA)
-    res_html = (send_post_request(api_session, ADD_QUESTION_URL, form_data)).text
+    res_html = (send_post_request(api_session, ADD_URL, form_data)).text
 
     submission_id = get_id(res_html)
     submission_url = f"{BASE_URL_API}/{MODEL_NAME}/{submission_id}?_csvProperties={CSV_PROPERTIES}"
