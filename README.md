@@ -83,10 +83,17 @@ pytest
 
 ## Tests
 
-- Add Thread
-- Add Question
-- Add Event
-- Add Ware
-- Add Project
-- Add Request
-- Add Script
+- Add Submissions
+    - Thread
+    - Question
+    - Event
+    - Ware
+    - Project
+    - Request
+    - Script
+
+## Markers
+
+- smoke: marks tests as included in the smoke testing
+- regress: marks tests as included in the regression testing
+- files: marks tests as requiring files upload
