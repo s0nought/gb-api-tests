@@ -28,19 +28,16 @@ test_data = [
     pytest.param("Ware", WARE_DATA, marks = pytest.mark.regress, id = "Ware"),
 ]
 
-@pytest.fixture(scope = "function")
-def w8(request):
-    sleep(1.337)
-    yield None
-
 @pytest.mark.usefixtures("api_session")
 @pytest.mark.parametrize(test_params, test_data)
-def test_add(w8, api_session, model_name, form_entries):
+def test_add(api_session, model_name, form_entries):
     url = get_add_url(model_name)
 
     form_html = api_session.get(url).text
     form_data = get_formdata(form_html, form_entries)
     res_html = api_session.post(url, form_data).text
+
+    sleep(1.337)
 
     submission_id = get_id(res_html)
     submission_url = f"{BASE_URL_API}/{model_name}/{submission_id}?_csvProperties={CSV_PROPERTIES}"
