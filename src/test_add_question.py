@@ -1,5 +1,6 @@
+import pytest
+
 from modules.constants import BASE_URL_API, USER_NAME
-from modules.fixtures import api_session
 from modules.formdata import QUESTION_DATA
 from modules.utils import get_add_url, send_get_request, send_post_request
 from modules.utils_parse import get_id, get_formdata
@@ -8,6 +9,7 @@ MODEL_NAME = "Question"
 CSV_PROPERTIES = "_idRow,_aSubmitter,_sText"
 ADD_URL = get_add_url(MODEL_NAME)
 
+@pytest.mark.usefixtures("api_session")
 def test_fn(api_session):
     form_html = (send_get_request(api_session, ADD_URL)).text
     form_data = get_formdata(form_html, QUESTION_DATA)
