@@ -1,6 +1,8 @@
-import requests
+__all__ = [
+    "assert_status_code",
+]
 
-Response = requests.models.Response
+from aliases import Response
 
 error_message = "Expected {0}, but got {1}"
 

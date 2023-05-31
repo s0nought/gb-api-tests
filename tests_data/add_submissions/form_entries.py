@@ -1,6 +1,20 @@
-from .constants import GAME_ID
-from .dictionaries import ACCESS, TOC, COMMENTS_MODE, IS_CREATOR, LANGUAGE
-from .utils import get_lorem_ipsum
+__all__ = [
+    "THREAD_DATA",
+    "QUESTION_DATA",
+    "EVENT_DATA",
+    "WARE_DATA",
+    "PROJECT_DATA",
+    "REQUEST_DATA",
+    "SCRIPT_DATA",
+]
+
+from datetime import datetime
+
+from common.constants import GAME_ID, LOREM_IPSUM
+from common.dictionaries import ACCESS, TOC, COMMENTS_MODE, IS_CREATOR, LANGUAGE
+
+def get_lorem_ipsum():
+    return f"{LOREM_IPSUM} {str(datetime.utcnow())}"
 
 THREAD_DATA = {
     "title": "Test Thread",

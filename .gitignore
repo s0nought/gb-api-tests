@@ -1,11 +1,7 @@
-# GIMP file format
-*.xcf
+**/__pycache__/*
+**/pytest_cache/*
 
-src/.pytest_cache/*
-src/__pycache__/*
-
-src/modules/__pycache__/*
-src/modules/credentials.py
+**/credentials.py
 
 # Editor directories and files
 .vscode/*

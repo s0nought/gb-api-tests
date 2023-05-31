@@ -1,3 +1,11 @@
+__all__ = [
+    "BASE_URL",
+    "BASE_URL_API",
+    "GAME_ID",
+    "USER_NAME",
+    "LOREM_IPSUM"
+]
+
 BASE_URL = "https://gamebanana.com"
 BASE_URL_API = f"{BASE_URL}/apiv11"
 

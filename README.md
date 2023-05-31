@@ -66,9 +66,14 @@ Being a member of the Dev-Tester team at GameBanana I would like to automate som
     pip install -r requirements.txt
     ```
 
+1. Set executable bit for scripts
+    ```
+    chmod +x run_smoke.sh
+    ```
+
 ## Configuration
 
-### src/modules/credentials.py.example
+### packages/common/credentials.py.example
 
 Fill in your login and password.
 
@@ -77,8 +82,7 @@ Rename `credentials.py.example` to `credentials.py`.
 ## Run tests
 
 ```
-cd ~/gb-api-tests/src
-pytest
+./run_smoke.sh
 ```
 
 ## Tests

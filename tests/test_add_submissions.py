@@ -1,22 +1,26 @@
 import pytest
 from time import sleep
 
-from modules.constants import BASE_URL_API, USER_NAME
-from modules.formdata import (
-    EVENT_DATA,
-    PROJECT_DATA,
-    QUESTION_DATA,
-    REQUEST_DATA,
-    SCRIPT_DATA,
+from common.constants import BASE_URL, BASE_URL_API, GAME_ID, USER_NAME
+from common.dictionaries import PLURALS
+from form_parser.utils import get_id, get_formdata
+
+from add_submissions.form_entries import (
     THREAD_DATA,
-    WARE_DATA
+    QUESTION_DATA,
+    EVENT_DATA,
+    WARE_DATA,
+    PROJECT_DATA,
+    REQUEST_DATA,
+    SCRIPT_DATA
 )
-from modules.utils import get_add_url
-from modules.utils_parse import get_id, get_formdata
+
+def get_add_url(model_name: str) -> str:
+    """Return Add <model_name> page URL"""
+
+    return f"{BASE_URL}/{PLURALS[model_name]}/add?gameid={GAME_ID}"
 
 CSV_PROPERTIES = "_idRow,_aSubmitter,_sText"
-
-test_params = "model_name, form_entries"
 
 test_data = [
     pytest.param("Event", EVENT_DATA, marks = pytest.mark.regress, id = "Event"),
@@ -29,7 +33,7 @@ test_data = [
 ]
 
 @pytest.mark.usefixtures("api_session")
-@pytest.mark.parametrize(test_params, test_data)
+@pytest.mark.parametrize("model_name, form_entries", test_data)
 def test_add(api_session, model_name, form_entries):
     url = get_add_url(model_name)
 

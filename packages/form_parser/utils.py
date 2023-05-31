@@ -1,8 +1,11 @@
+__all__ = [
+    "get_id",
+    "get_formdata",
+]
+
 import re
-
 from bs4 import BeautifulSoup, SoupStrainer
-
-from .selectors import CSS_SELECTORS
+from .selectors import SELECTORS
 
 def get_id(html: str) -> int:
     """Parse Submission's ID"""
@@ -29,31 +32,31 @@ def get_formdata(html: str, entries: dict[str, str]) -> dict[str, str]:
 
     # token and form_name are required
 
-    token = soup.select_one(CSS_SELECTORS["token"])
+    token = soup.select_one(SELECTORS["token"])
     data.update({token["name"] : token["value"]})
 
-    form_name = soup.select_one(CSS_SELECTORS["form_name"])
+    form_name = soup.select_one(SELECTORS["form_name"])
     data.update({form_name["name"] : form_name["value"]})
 
     for k, v in entries.items():
 
         if k not in CUSTOM_ACTION_ENTRIES:
-            tag = soup.select_one(CSS_SELECTORS[k])
+            tag = soup.select_one(SELECTORS[k])
             data.update({tag["name"] : v})
             continue
 
         if k == "image":
-            tag = soup.select_one(CSS_SELECTORS[k])
+            tag = soup.select_one(SELECTORS[k])
 
             data.update({"_sTicketId" : ""})
             data.update({tag["name"] : "REPLACE_WITH_IMAGE_LIST"})
 
         if k == "request_requirements":
-            tag = soup.select_one(CSS_SELECTORS[k])
+            tag = soup.select_one(SELECTORS[k])
             data.update({tag["id"] + "[]" : v})
 
         if k == "submission_authors":
-            match = re.findall(CSS_SELECTORS[k], html)
+            match = re.findall(SELECTORS[k], html)
             name = match[0][16:-2]
 
             # refactor
@@ -66,7 +69,7 @@ def get_formdata(html: str, entries: dict[str, str]) -> dict[str, str]:
                 data.update({f"{name}[{i}][author_roles][]" : author_roles})
 
         if k == "license_checklist":
-            tag = soup.select_one(CSS_SELECTORS[k])
+            tag = soup.select_one(SELECTORS[k])
             name = tag["name"].split("[")[0]
 
             # why does it require 6 items?
@@ -74,7 +77,7 @@ def get_formdata(html: str, entries: dict[str, str]) -> dict[str, str]:
                 data.update({f"{name}[_aOptions][{i}]" : v})
 
         if k == "requirements":
-            tags = soup.select(CSS_SELECTORS[k])
+            tags = soup.select(SELECTORS[k])
 
             for i in range(len(tags)):
                 data.update({tags[i]["name"] : v[i]})

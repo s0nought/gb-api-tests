@@ -1,8 +1,8 @@
 import pytest
 import requests
 
-from modules.constants import BASE_URL_API
-from modules.credentials import credentials
+from common.constants import BASE_URL_API
+from common.credentials import CREDENTIALS
 
 @pytest.fixture(scope = "session")
 def api_session() -> requests.sessions.Session:
@@ -11,7 +11,7 @@ def api_session() -> requests.sessions.Session:
     session = requests.Session()
 
     url = f"{BASE_URL_API}/Member/Authenticate"
-    data = credentials
+    data = CREDENTIALS
 
     response = session.post(url, json = data)
     body = response.json()

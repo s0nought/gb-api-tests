@@ -1,3 +1,12 @@
+__all__ = [
+    "PLURALS",
+    "ACCESS",
+    "TOC",
+    "COMMENTS_MODE",
+    "IS_CREATOR",
+    "LANGUAGE",
+]
+
 PLURALS = {
     "Event": "events",
     "Project": "projects",
