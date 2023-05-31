@@ -1,7 +1,6 @@
 import pytest
 import requests
 
-from modules.assertions import assert_status_code
 from modules.constants import BASE_URL_API
 from modules.credentials import credentials
 
@@ -15,7 +14,9 @@ def api_session() -> requests.sessions.Session:
     data = credentials
 
     response = session.post(url, json = data)
+    body = response.json()
 
-    assert_status_code(response, 200)
+    assert response.status_code == 200
+    assert body["_sStatus"] == "SUCCESS"
 
     yield session
