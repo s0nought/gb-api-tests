@@ -1,10 +1,6 @@
 # GIMP file format
 *.xcf
 
-tmp/*
-
-src/modules/*.txt
-
 src/.pytest_cache/*
 src/__pycache__/*
 
