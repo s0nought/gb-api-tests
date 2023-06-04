@@ -1,8 +1,8 @@
 import pytest
 import requests
 
-from common.constants import BASE_URL_API
-from common.credentials import CREDENTIALS
+from apiv11.authenticate import log_in
+from credentials import *
 
 @pytest.fixture(scope = "session")
 def api_session() -> requests.sessions.Session:
@@ -10,13 +10,6 @@ def api_session() -> requests.sessions.Session:
 
     session = requests.Session()
 
-    url = f"{BASE_URL_API}/Member/Authenticate"
-    data = CREDENTIALS
-
-    response = session.post(url, json = data)
-    body = response.json()
-
-    assert response.status_code == 200
-    assert body["_sStatus"] == "SUCCESS"
+    res = log_in(session, user_name, password)
 
     yield session
