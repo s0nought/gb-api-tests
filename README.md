@@ -39,6 +39,19 @@ Fill in your login and password.
 
 Rename `credentials.py.example` to `credentials.py`.
 
+### Visual Studio Code
+
+`.vscode/settings.json`
+
+```
+{
+    "python.analysis.extraPaths": [
+        "./endpoints",
+        "./tests_data"
+    ]
+}
+```
+
 ## Run tests
 
 ```
