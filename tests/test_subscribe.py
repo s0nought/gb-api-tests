@@ -8,7 +8,7 @@ subscription_id = 0
 @pytest.mark.parametrize("model_name, id_", [("Mod", 444709)])
 class TestSubscribe:
 
-    def test_subscribe(self, api_session, model_name, id_):
+    def test_subscribe(api_session, model_name, id_):
         global subscription_id
 
         count_before = get_subscriber_count(api_session, model_name, id_)
@@ -24,7 +24,7 @@ class TestSubscribe:
 
         assert count_after == count_before + 1
 
-    def test_unsubscribe(self, api_session, model_name, id_):
+    def test_unsubscribe(api_session, model_name, id_):
         global subscription_id
 
         count_before = get_subscriber_count(api_session, model_name, id_)
