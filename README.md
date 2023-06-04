@@ -33,3 +33,14 @@ Being a member of the Dev-Tester team at GameBanana I would like to automate som
 
 ## Configuration
 
+### tests_data/credentials.py.example
+
+Fill in your login and password.
+
+Rename `credentials.py.example` to `credentials.py`.
+
+## Run tests
+
+```
+cd ~/gb-api-tests && pytest
+```
