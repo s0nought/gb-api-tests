@@ -30,15 +30,18 @@ def get_todos(session: Session, model_name: str, id_: int) -> Response:
 
     return session.get(url)
 
-def get_todos_count_and_latest_id_and_text(response: Response) -> tuple[int, int, str]: # refactor ?
+# Can't request _nAllTodosCount with get_model_properties
+def get_todos_count_and_latest_id_and_text(response: Response) -> tuple[int, int, str]:
     """Return todos count and latest todo's id and source text"""
 
     body = response.json()
 
     count = body["_aMetadata"]["_nRecordCount"]
     record = body["_aRecords"][0]
-    latest_id = record["_idRow"]
-    source_text = record["_sText"]
+
+    if record:
+        latest_id = record["_idRow"]
+        source_text = record["_sText"]
 
     return count, latest_id, source_text
 
