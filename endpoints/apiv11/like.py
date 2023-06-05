@@ -30,7 +30,7 @@ def get_likes(session: Session, model_name: str, id_: int, page: int = 1) -> Res
 
     return session.get(url)
 
-def get_latest_liker_id(response: Response) -> dict:
+def get_latest_liker_id(response: Response) -> int:
     """Return latest liker's ID"""
 
     body = response.json()
