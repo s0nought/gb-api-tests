@@ -1,6 +1,7 @@
 __all__ = [
+    "get_likes_count",
     "get_likes",
-    "get_likes_count_and_latest_liker_id",
+    "get_latest_liker_id",
     "add_like",
     "remove_like",
 ]
@@ -11,6 +12,16 @@ from .paths import (
     LIKE_ADD_URL,
     LIKE_REMOVE_URL,
 )
+from .model import (
+    get_model_properties,
+)
+
+def get_likes_count(session: Session, model_name: str, id_: int, properties: str = "_nLikeCount") -> int:
+    """Return likes count"""
+
+    res = get_model_properties(session, model_name, id_, properties)
+
+    return res.json()[properties]
 
 def get_likes(session: Session, model_name: str, id_: int, page: int = 1) -> Response:
     """Return likes list"""
@@ -19,16 +30,12 @@ def get_likes(session: Session, model_name: str, id_: int, page: int = 1) -> Res
 
     return session.get(url)
 
-def get_likes_count_and_latest_liker_id(response: Response) -> tuple[int, int]: # refactor ?
-    """Return likes count and latest liker's ID"""
+def get_latest_liker_id(response: Response) -> dict:
+    """Return latest like object"""
 
     body = response.json()
 
-    count = body["_aMetadata"]["_nRecordCount"]
-    record = body["_aRecords"][0]
-    latest_id = record["_aSubmitter"]["_idRow"]
-
-    return count, latest_id
+    return body["_aRecords"][0]["_aSubmitter"]["_idRow"]
 
 def add_like(session: Session, model_name: str, id_: int) -> Response:
     """Add Like"""
