@@ -1,6 +1,7 @@
 __all__ = [
-    "get_thankers",
     "get_thankers_count",
+    "get_thankers",
+    "get_latest_thanker_id",
     "add_thank",
 ]
 
@@ -13,6 +14,13 @@ from .model import (
     get_model_properties,
 )
 
+def get_thankers_count(session: Session, model_name: str, id_: int, properties: str = "_nThanksCount") -> int:
+    """Return thankers count"""
+
+    res = get_model_properties(session, model_name, id_, properties)
+
+    return res.json()[properties]
+
 def get_thankers(session: Session, model_name: str, id_: int, page: int = 1) -> Response:
     """Return thankers list"""
 
@@ -20,12 +28,12 @@ def get_thankers(session: Session, model_name: str, id_: int, page: int = 1) -> 
 
     return session.get(url)
 
-def get_thankers_count(session: Session, model_name: str, id_: int, properties: str = "_nThanksCount") -> int:
-    """Return thankers count"""
+def get_latest_thanker_id(response: Response) -> int:
+    """Return latest thanker's ID"""
 
-    res = get_model_properties(session, model_name, id_, properties)
+    body = response.json()
 
-    return res.json()[properties]
+    return body["_aRecords"][0]["_aSubmitter"]["_idRow"]
 
 def add_thank(session: Session, model_name: str, id_: int, points_amount: int = 5) -> Response:
     """Add Thank"""
