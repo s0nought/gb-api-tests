@@ -39,9 +39,14 @@ def get_latest_post_id_and_text(response: Response) -> tuple[int, str]:
 
     body = response.json()
 
+    post_id = 0
+    source_text = ""
+
     record = body["_aRecords"][0]
-    post_id = record["_idRow"]
-    source_text = record["_sText"]
+
+    if record:
+        post_id = record["_idRow"]
+        source_text = record["_sText"]
 
     return post_id, source_text
 
