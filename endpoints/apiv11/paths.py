@@ -8,6 +8,12 @@ __all__ = [
     "STAMPS_LIST_URL",
     "UNTRASH_REASONS_URL",
 
+    # Issues
+    "ISSUES_LIST_URL",
+    "ISSUES_ADD_URL",
+    "ISSUES_CHANGE_URL",
+    "ISSUES_REMOVE_URL",
+
     # Like
     "LIKES_LIST_URL",
     "LIKE_ADD_URL",
@@ -49,6 +55,11 @@ AUTHENTICATE_URL = BASE_URL + "/Member/Authenticate"
 
 STAMPS_LIST_URL = BASE_URL + "/Util/Config/Stamps"
 UNTRASH_REASONS_URL = BASE_URL + "/Util/Config/UntrashReasons"
+
+ISSUES_LIST_URL = BASE_URL + r"/{0}/{1}/Issues?_nPage={2}"
+ISSUES_ADD_URL = BASE_URL + r"/{0}/{1}/Issue/Add"
+ISSUES_CHANGE_URL = BASE_URL + r"/Issue/{0}"
+ISSUES_REMOVE_URL = ISSUES_CHANGE_URL
 
 LIKES_LIST_URL = BASE_URL + r"/{0}/{1}/Likes?_nPage={2}"
 LIKE_ADD_URL = BASE_URL + r"/{0}/{1}/Like"
