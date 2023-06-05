@@ -39,11 +39,14 @@ def get_todos_count_and_latest_id_and_text(response: Response) -> tuple[int, int
     count = body["_aMetadata"]["_nRecordCount"]
     record = body["_aRecords"][0]
 
+    todo_id = 0
+    source_text = ""
+
     if record:
-        latest_id = record["_idRow"]
+        todo_id = record["_idRow"]
         source_text = record["_sText"]
 
-    return count, latest_id, source_text
+    return count, todo_id, source_text
 
 def add_todo(session: Session, model_name: str, id_: int, source_text: str,
              priority: int = 2, completion: int = 0, deadline: str = None,
